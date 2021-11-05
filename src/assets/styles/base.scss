@@ -1,0 +1,19 @@
+.btn {
+  background: teal;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px grey;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 50ms ease-out;
+  &:hover {
+    transform: translate(5px 5px);
+  }
+  &:active {
+    opacity: 0.8;
+    transform: scale(95%);
+  }
+}
