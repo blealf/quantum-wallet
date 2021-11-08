@@ -1,26 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { v4 as uuidV4 } from 'uuid'
 import './App.css';
-import Alert from './components/Base/Components/Alert'
+import Toaster from './components/Base/Components/Toaster'
 import Button from './components/Base/Components/Button'
 import Card from './components/Base/Components/Card'
 import Modal from './components/Base/Components/Modal'
-import styled from 'styled-components'
 import { themes, ThemeContext } from './utils/theme'
 import { AlertContext } from './utils/toasterAlert'
 import { BsCheckAll, BsFillBellFill, BsFillCameraFill } from 'react-icons/bs'
-const AlertWrapper = styled.div`
-  position: absolute;
-  flex-direction: column;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  top: 20px;
-  right: 10px;
-  overflow: hidden;
-  white-space:nowrap;
-  padding: 10px;
-`;
 
 const App = () => {
 
@@ -31,19 +18,13 @@ const App = () => {
     setTheme(theme === themes.light ? themes.dark : themes.light)
   }
 
-  const removeAlert = (id) => {
-    setAlertArray(alertArray.filter(alert => alert.id !== id))
-  }
-
   const triggerAlert = (data, show) => {
     const id = `${uuidV4()} ${Date.now()}`
     setAlertArray([
       {
         id,
-        alert: (
-          <Alert id={id} key={id} {...data} show={show} remove={removeAlert}>
-            { data.message }
-          </Alert>)
+        data,
+        show
       }
     ].concat(alertArray))
   }
@@ -58,6 +39,7 @@ const App = () => {
             { message: `Well, i think you got it all wrong and it is so true`,
               type: "danger",
               dismiss: true,
+              timeout: 10000
              },
             true
           )}> Show Alert</button>
@@ -69,7 +51,9 @@ const App = () => {
             { message: "Well, i think may have it all wrong and it is so true", type: "alert", dismiss: true },
             true
           )}> Show Alert</button>
-          <Modal/>
+
+          <Toaster toastList={alertArray} setToastList={setAlertArray}></Toaster>
+
           <Button type="primary">Primary</Button>
           <Button type="secondary">Secondary</Button>
           <Button type="success">Success</Button>
@@ -83,9 +67,6 @@ const App = () => {
           <Button type="primary" small>Primary</Button>
           <Button type="primary" outlined><BsFillCameraFill/>Primary</Button>
           <Button type="primary" rounded><BsCheckAll/>Primary</Button>
-          <AlertWrapper id="toasterContainer">
-            {alertArray.map(item => item.alert)}
-          </AlertWrapper>
         </AlertContext.Provider>
         <Card
           title="card title"

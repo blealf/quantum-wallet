@@ -35,7 +35,7 @@ const ModalDiv = styled.div`
   vertical-align: middle;
   horizontal-align: middle;
   z-index: 99;
-  backdrop-filter: blur;
+  backdrop-filter: blur(40px);
 `;
 
 const Modal = () => {
@@ -43,6 +43,32 @@ const Modal = () => {
       <ModalWrapper onClick={(e) => e.target.style.display = 'none'}>
         <ModalDiv>
           Something here, just look well
+          <br />
+          lorem ipsum dolor sit amet, consectet
+          <br />
+          fff
+          fff
+          fffffffff
+          <br />
+
+
+          lorem501 et
+
+
+          fff
+          fffffffff
+          <br />
+          fff
+          fffffffff
+          fff
+          <br />
+          f
+
+          ffffffffff
+
+          ffffffffff
+
+          ffff
         </ModalDiv>
       </ModalWrapper>
     )
